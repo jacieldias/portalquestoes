@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{base}">
+	
+<head>
+	<title>Assunto</title>
+</head>
+
+<section layout:fragment="conteudo">
+	<!-- Modal Mensagem de Sucesso -->
+	<div id="myModal" class="modal fade" data-backdrop="static" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+					<h4 class="modal-title">Atenção!</h4>
+				</div>
+				<div class="modal-body">
+					<div id="msgSucesso">
+						<p id="msgVazia" th:text="${mensagem}"></p>
+					</div>
+				</div>
+				<div class="modal-footer">					
+					<a th:href="@{/assunto/novo}" class="btn btn-success">
+						OK
+					</a>					
+			   </div>
+			</div>
+		</div>
+	</div>	
+	
+	<div class="content"> 
+    	<div class="row">
+    		<div class="col-md-12">
+	            <div class="box box-primary">	           
+		        	<div class="box-header with-border">
+		            	<h3 class="box-title">Cadastro Assunto</h3>
+		            </div>		            
+		            <form id="frm-assunto" role="form" method="POST" th:action="@{/assunto/salvar}" th:object="${assunto}">
+						<div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}">
+							<button type="button" class="close" data-dismiss="alert" ><span aria-hidden="true">&times;</span></button>
+							<th:block th:each="detailedError : ${#fields.detailedErrors()}">
+								<div><i class="fa  fa-exclamation-circle"></i> [[${detailedError.message}]]</div>
+							</th:block>
+						</div>		            
+						<div class="box-body">
+						    <input type="hidden" th:field="*{id}">               
+                      		<div class="row">		
+								<div class="col-md-5">  
+                                	<div class="form-group">
+                                    	<label for="disciplina">Disciplina:</label>
+                                     	<select class="form-control select2" style="width: 100%;" id="disciplina" th:field="*{disciplina}"> 
+	                                     	<option value=""></option>
+	                                       	<option th:each="disciplina : ${disciplinas}" th:text="${disciplina.nome}" th:value="${disciplina.id}"></option>
+                                     	</select>
+                                   	</div>                          
+                               	</div>								
+                      								
+								<div class="col-md-7"> 
+                                	<div class="form-group">
+                                 		<label for="descricao">Descrição:</label>
+                                 		<input type="text" class="form-control" id="descricao" th:field="*{descricao}">
+                               		</div>
+                             	</div>
+							</div>							
+						</div>						
+						<div class="box-footer">
+                        	<button id="btn-salva-usuario" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
+                       	</div>							            
+		            </form> 	                                  
+	    		</div>
+    		</div>
+    	</div>
+    </div>		
+    <th:block layout:fragment="scripts">
+		<script th:src="@{/javascript/cadastro-assunto.js}"></script>
+		<script th:src="@{/adminLTE/plugins/select2/select2.min.js}"></script>
+		<script>
+			$(document).ready(function() {
+			    $('.select2').select2();
+			});		
+		</script>
+    </th:block>
+</section>
+</html>

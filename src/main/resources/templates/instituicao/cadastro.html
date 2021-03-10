@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{base}">
+	
+<head>
+	<title>Instituição</title>
+</head>
+
+<section layout:fragment="conteudo">
+	<!-- Modal Mensagem de Sucesso -->
+	<div id="myModal" class="modal fade" data-backdrop="static" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+					<h4 class="modal-title">Atenção!</h4>
+				</div>
+				<div class="modal-body">
+					<div id="msgSucesso">
+						<p id="msgVazia" th:text="${mensagem}"></p>
+					</div>
+				</div>
+				<div class="modal-footer">					
+					<a th:href="@{/instituicao/nova}" class="btn btn-success">
+						OK
+					</a>					
+			   </div>
+			</div>
+		</div>
+	</div>	
+	
+	<div class="content"> 
+    	<div class="row">
+    		<div class="col-md-12">
+	            <div class="box box-primary">	           
+		        	<div class="box-header with-border">
+		            	<h3 class="box-title">Cadastro - Instituição</h3>
+		            </div>		            
+		            <form id="frm-instituicao" role="form" method="POST" th:action="@{/instituicao/salvar}" th:object="${instituicao}">
+						<div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}">
+							<button type="button" class="close" data-dismiss="alert" ><span aria-hidden="true">&times;</span></button>
+							<th:block th:each="detailedError : ${#fields.detailedErrors()}">
+								<div><i class="fa  fa-exclamation-circle"></i> [[${detailedError.message}]]</div>
+							</th:block>
+						</div>		            
+						<div class="box-body">
+						    <input type="hidden" th:field="*{id}">               
+                      		<div class="row">								
+								<div class="col-md-5"> 
+                                	<div class="form-group">
+                                 		<label for="nome">Nome:</label>
+                                 		<input type="text" class="form-control" id="nome" th:field="*{nome}">
+                               		</div>
+                             	</div>
+                             	
+								<div class="col-md-5"> 
+                                	<div class="form-group">
+                                 		<label for="nomeUsual">Nome Usual:</label>
+                                 		<input type="text" class="form-control" id="nomeUsual" th:field="*{nomeUsual}">
+                               		</div>
+                             	</div>
+                             	
+	                            <div class="col-md-2">  
+	                           		<div class="form-group">
+		                               <label for="ativo">Ativa</label>
+		                               <div class="input-group">
+		                           	 	<input class="minimal" type="checkbox" id="ativo" checked="checked" th:field="*{ativo}">
+		                           	   </div>                                 
+		                           </div>                          
+	                           </div>	                            
+							</div>							
+						</div>						
+						<div class="box-footer">
+                        	<button id="btn-salva-usuario" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
+                       		<div class="pull-right">
+		                       	<a href="#" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Excluir</a>
+		                    </div>                       	
+                       	</div>							            
+		            </form> 	                                  
+	    		</div>
+    		</div>
+    	</div>
+    	
+    	<div class="row">
+    		<div class="col-md-12">
+	            <div class="box box-primary">	           
+		        	<div class="box-header with-border">
+		            	<h3 class="box-title">Instituições Cadastradas</h3>
+		            </div>
+		            
+		            <div class="table-responsive"> 
+		              <table id="tbl-banca" class="table table-bordered table-striped table-condensed table-hover sortable">
+		                <thead>
+		                <tr>
+		                  <th class="text-center" hidden="true">Id</th>
+		                  <th class="text-center">Ações</th>
+		                  <th class="text-center">Nome</th>
+		                  <th class="text-center">Nome Usual</th>
+		                  <th class="text-center">Ativo</th>
+		                </tr>
+		                </thead>
+		                <tbody>
+		                	<tr th:each="instituicao : ${instituicoes}">
+	
+			                  <td class="text-center">
+	     						  <a th:href="@{/instituicao/editar/{id}(id=${instituicao.id})}"
+								     class="btn btn-primary btn-xs" data-toggle="popover"
+									 data-trigger="hover" data-placement="top"
+									 data-content="Alterar Instituição"><span class="glyphicon glyphicon-edit"></span>
+								  </a>
+			                  </td>
+		                	
+			                  <td class="text-center" th:text="${instituicao.nome}"></td>
+			                  <td class="text-center" th:text="${instituicao.nomeUsual}"></td>
+			                  <td class="text-center" th:text="${instituicao.ativo} ? 'Ativa' : 'Inativa'"></td>
+		                	</tr>
+		                </tbody>                
+		              </table>
+		             </div>             
+ 				</div>
+ 			</div>
+ 		</div>		   	
+    </div>		
+    <th:block layout:fragment="scripts">
+		<script th:src="@{/javascript/cadastro-instituicao.js}"></script>
+    </th:block>
+</section>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"	
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Portal de Questões</title>
+  
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  
+  <link rel="stylesheet" th:href="@{/adminLTE/bootstrap/css/bootstrap.min.css}">  
+  <link rel="stylesheet" th:href="@{/adminLTE/plugins/Font-Awesome-master/css/font-awesome.min.css}">
+  <link rel="stylesheet" th:href="@{/adminLTE/plugins/select2/select2.min.css}">
+  <link rel="stylesheet" th:href="@{/adminLTE/dist/css/AdminLTE.min.css}">
+  <link rel="stylesheet" th:href="@{/adminLTE/dist/css/skins/_all-skins.min.css}">
+  
+  <script th:src="@{/adminLTE/plugins/jQuery/jquery-2.2.3.min.js}"></script>
+</head>
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to get the
+desired effect
+|---------------------------------------------------------|
+| SKINS         | skin-blue                               |
+|               | skin-black                              |
+|               | skin-purple                             |
+|               | skin-yellow                             |
+|               | skin-red                                |
+|               | skin-green                              |
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | fixed                                   |
+|               | layout-boxed                            |
+|               | layout-top-nav                          |
+|               | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+<body class="hold-transition skin-red sidebar-mini">
+<div class="wrapper">
+
+  <!-- Main Header -->
+  <header class="main-header">
+
+    <!-- Logo -->
+    <a th:href="@{/}" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>P</b>Q</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Portal</b>Questões</span>
+    </a>
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+          <!-- Essa ul serve para adicionar os ícones de notificações, perfis e etc -->
+        </ul>
+      </div>
+    </nav>
+  </header>
+  
+  <aside class="main-sidebar">
+    <section class="sidebar">
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="treeview">
+          <a href="#"><i class="fa fa-folder"></i> <span>Cadastros</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+          	<li><a th:href="@{/assunto/novo}">Assunto</a></li>
+            <li><a th:href="@{/banca/nova}">Banca Organizadora</a></li>
+            <li><a th:href="@{/cargo/novo}">Cargo/Curso</a></li>
+            <li><a th:href="@{/disciplina/nova}">Disciplina</a></li>
+            <li><a th:href="@{/instituicao/nova}">Instituição</a></li>
+            <li><a th:href="@{/nivel/novo}">Nível de dificuldade</a></li>
+            <li><a th:href="@{/questao/nova}">Questão</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </aside>
+
+  <!-- Injeção do conteúdo -->
+  <div class="content-wrapper">
+  	<div layout:fragment="conteudo"></div>
+  </div>
+
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      Anything you want
+    </div>
+    <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<script th:src="@{/adminLTE/plugins/jQueryUI/jquery-ui.min.js}"></script>
+<script th:src="@{/adminLTE/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/adminLTE/dist/js/app.min.js}"></script>
+<script th:src="@{/adminLTE/dist/js/demo.js}"></script>
+<script th:src="@{/adminLTE/plugins/iCheck/icheck.min.js}"></script>
+<script th:src="@{/adminLTE/plugins/bootstrap-filestyle/bootstrap-filestyle.js}"></script>
+<script th:src="@{/adminLTE/plugins/fullcalendar/moment.min.js}"></script>
+<script th:src="@{/adminLTE/plugins/datepicker/moment-with-locale.js}"></script>
+<script th:src="@{/adminLTE/plugins/input-mask/jquery.mask.min.js}"></script>
+<script th:src="@{/adminLTE/plugins/jQuery/jquery.validate.js}"></script>
+<th:block layout:fragment="scripts"></th:block>
+</body>
+</html>

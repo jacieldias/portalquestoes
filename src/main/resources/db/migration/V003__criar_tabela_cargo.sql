@@ -1,0 +1,7 @@
+CREATE SEQUENCE cargo_seq;
+
+CREATE TABLE cargo(
+	id BIGINT NOT NULL,
+	descricao VARCHAR NOT NULL,
+	CONSTRAINT pk_cargo PRIMARY KEY (id)
+);
